@@ -1,0 +1,43 @@
+classDiagram
+    class Customer {
+        - id: Integer <<PK>>
+        - name: String
+        - address: String
+        - phone: String
+        - email: String
+    }
+
+    class Order {
+        - id: Integer <<PK>>
+        - order_date: Date
+        - total_amount: Decimal
+        - customer_id: Integer <<FK>>
+    }
+
+    class OrderItem {
+        - order_id: Integer <<PK, FK>>
+        - product_id: Integer <<PK, FK>>
+        - quantity: Integer
+        - price: Decimal
+    }
+
+    class Product {
+        - id: Integer <<PK>>
+        - name: String
+        - description: String
+        - price: Decimal
+        - quantity_in_stock: Integer
+    }
+
+    class Supplier {
+        - id: Integer <<PK>>
+        - name: String
+        - address: String
+        - phone: String
+    }
+
+    Customer "1" -- "*" Order : places
+    Order "1" -- "*" OrderItem : contains
+    OrderItem "1" -- "1" Product : includes
+    Product "1" -- "*" OrderItem : is included in
+    Product "1" -- "*" Supplier : supplied by

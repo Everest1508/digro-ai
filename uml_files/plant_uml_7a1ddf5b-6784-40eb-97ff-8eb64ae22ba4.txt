@@ -1,0 +1,23 @@
+@startuml
+title Delivery Service with Key Features
+skinparam monochrome true
+rectangle "Delivery Service" {
+    rectangle "Order Management"
+    rectangle "Tracking & Tracing"
+    rectangle "Customer Service"
+    rectangle "Payment Processing"
+    rectangle "Fleet Management"
+    rectangle "Warehouse Management"
+    rectangle "Customer Relationship Management"
+    rectangle "Data Analytics & Reporting"
+}
+
+"Delivery Service" -- "Order Management"
+"Delivery Service" -- "Tracking & Tracing"
+"Delivery Service" -- "Customer Service"
+"Delivery Service" -- "Payment Processing"
+"Delivery Service" -- "Fleet Management"
+"Delivery Service" -- "Warehouse Management"
+"Delivery Service" -- "Customer Relationship Management"
+"Delivery Service" -- "Data Analytics & Reporting"
+@enduml

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password - Digro AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    
+    <!-- Main Content Section -->
+    <div class="flex flex-col justify-center items-center h-screen">
+        
+        <h2 class="text-2xl font-bold text-center mb-6">Reset Your Password</h2>
+        <div class="w-96 bg-gray-800 rounded-lg shadow-lg p-8">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="new_password" class="block text-gray-300 mb-2">New Password</label>
+                    <input type="password" id="new_password" name="new_password" required class="bg-gray-700 text-white rounded-lg w-full py-2 px-3 focus:outline-none focus:ring focus:ring-green-500">
+                </div>
+                <div class="mb-6">
+                    <label for="confirm_password" class="block text-gray-300 mb-2">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required class="bg-gray-700 text-white rounded-lg w-full py-2 px-3 focus:outline-none focus:ring focus:ring-green-500">
+                </div>
+                <button type="submit" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg w-full">Reset Password</button>
+            </form>
+            <p class="text-center text-gray-400 mt-4">
+                Remembered your password? <a href="{% url 'login' %}" class="text-green-400 hover:underline">Login</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

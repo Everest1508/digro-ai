@@ -1,0 +1,48 @@
+
+{% extends "components/base.html" %}
+
+{% block title %}About - Digro AI{% endblock %}
+
+{% block content %}
+
+    <!-- About Section -->
+    <header class="bg-gray-800 flex flex-col justify-center items-center text-center py-20 h-screen">
+        <h1 class="text-4xl font-bold mb-4">About Digro AI</h1>
+        <p class="text-lg text-gray-400 max-w-2xl mx-auto">Digro AI is committed to revolutionizing the way diagrams are created. Our AI-driven platform empowers users to transform their ideas into professional diagrams effortlessly, enabling faster project development and collaboration.</p>
+    </header>
+
+    <!-- Mission Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold mb-6">Our Mission</h2>
+            <p class="text-lg text-gray-400 mb-8">To simplify diagram creation through the power of artificial intelligence, making it accessible to everyone, regardless of their technical background.</p>
+            <a href="#get-started" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-3 px-6 md:px-8 rounded-lg">Get Started with Digro AI</a>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    {% comment %} <section class="py-20 bg-gray-800">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold mb-6">Meet the Team</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-8">
+                <div class="bg-gray-700 p-4 rounded-lg w-full md:w-1/4">
+                    <h3 class="text-xl font-bold">Alice Smith</h3>
+                    <p class="text-gray-400">Co-founder & CEO</p>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-lg w-full md:w-1/4">
+                    <h3 class="text-xl font-bold">Bob Johnson</h3>
+                    <p class="text-gray-400">Co-founder & CTO</p>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-lg w-full md:w-1/4">
+                    <h3 class="text-xl font-bold">Charlie Brown</h3>
+                    <p class="text-gray-400">Lead Designer</p>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-lg w-full md:w-1/4">
+                    <h3 class="text-xl font-bold">Dana White</h3>
+                    <p class="text-gray-400">Marketing Manager</p>
+                </div>
+            </div>
+        </div>
+    </section> {% endcomment %}
+
+{% endblock %}

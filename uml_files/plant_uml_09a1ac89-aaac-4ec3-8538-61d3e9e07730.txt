@@ -1,0 +1,14 @@
+```plantuml
+@startuml
+
+participant Customer
+participant Order
+participant Warehouse
+
+Customer -> Order: Place Order
+Order -> Warehouse: Fulfill Order
+Warehouse -> Order: Ship Order
+Order -> Customer: Receive Order
+
+@enduml
+```

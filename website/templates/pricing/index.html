@@ -1,0 +1,71 @@
+
+{% extends "components/base.html" %}
+
+{% block title %}Pricing - Digro AI{% endblock %}
+
+{% block content %}
+    <!-- Pricing Section -->
+    <header class="bg-gray-800 flex flex-col justify-center items-center text-center py-20 pt-36">
+        <h1 class="text-4xl font-bold mb-4">Pricing Plans</h1>
+        <p class="text-lg text-gray-400 max-w-2xl mx-auto">Choose the plan that suits your needs and start creating diagrams effortlessly with Digro AI.</p>
+    </header>
+
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto">
+            <div class="flex flex-wrap justify-center gap-8">
+                <!-- Free Plan -->
+                <div class="bg-gray-700 p-6 rounded-lg w-full md:w-1/4 shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4">Free</h2>
+                    <p class="text-lg text-gray-400 mb-4">Perfect for individuals starting out with diagram creation.</p>
+                    <p class="text-3xl font-bold mb-6">$0/month</p>
+                    <ul class="mb-6">
+                        <li>Basic diagram features</li>
+                        <li>Up to 5 diagrams</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="#get-started" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg w-full">Get Started</a>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="bg-gray-700 p-6 rounded-lg w-full md:w-1/4 shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4">Pro</h2>
+                    <p class="text-lg text-gray-400 mb-4">Ideal for professionals needing advanced features.</p>
+                    <p class="text-3xl font-bold mb-6">$19/month</p>
+                    <ul class="mb-6">
+                        <li>Advanced diagram features</li>
+                        <li>Unlimited diagrams</li>
+                        <li>Priority email support</li>
+                    </ul>
+                    <a href="#get-started" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg w-full">Get Started</a>
+                </div>
+
+                <!-- Team Plan -->
+                <div class="bg-gray-700 p-6 rounded-lg w-full md:w-1/4 shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4">Team</h2>
+                    <p class="text-lg text-gray-400 mb-4">Designed for teams needing collaborative features.</p>
+                    <p class="text-3xl font-bold mb-6">$49/month</p>
+                    <ul class="mb-6">
+                        <li>Collaborative diagram features</li>
+                        <li>Team management tools</li>
+                        <li>Dedicated support</li>
+                    </ul>
+                    <a href="#get-started" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg w-full">Get Started</a>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="bg-gray-700 p-6 rounded-lg w-full md:w-1/4 shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4">Enterprise</h2>
+                    <p class="text-lg text-gray-400 mb-4">For large organizations needing custom solutions.</p>
+                    <p class="text-3xl font-bold mb-6">Contact Us</p>
+                    <ul class="mb-6">
+                        <li>Custom solutions</li>
+                        <li>Enhanced security</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <a href="#contact" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg w-full">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

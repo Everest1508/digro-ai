@@ -1,0 +1,16 @@
+@startuml
+participant Customer as Cu
+participant Delivery_Service as DS
+participant Restaurant as Res
+participant Driver as Dr
+
+DS -> Res : Create order
+Res -> Cu : show order details
+Cu -> Res : place order
+Res -> DS : order created
+
+DS -> Dr : assign driver
+Dr -> Cu : on the way
+Dr -> Cu : delivered
+Cu -> DS : rate service
+@enduml
