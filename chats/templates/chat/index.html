@@ -27,102 +27,106 @@
             </div>
         {% endfor %}
     </div>
-<!-- Chat Area -->
-<div class="w-3/4 p-4 flex flex-col h-screen">
-    <h2 class="text-2xl font-bold mb-4">Chat with Digro AI</h2>
-    <div class="flex-1 overflow-y-auto mb-4 hide-scrollbar" id="messages-container">
-        <div id="messages">
-            {% for message in messages %}
-            {% if message.sender == 'user' %}
-            <div class="mb-2 text-right">
-                <div class="bg-green-500 p-2 rounded-lg inline-block">
-                    {{ message.content }}
-                </div>
-            </div>
-            {% else %}
-            <div class="mb-2 text-left">
-                <div class="bg-gray-700 p-2 rounded-lg inline-block">
-                    {% if message.is_image %}
-                    <img src="{{message.image.url}}" alt="Generated UML Diagram" class="rounded-lg" />
-                    {% else %}
-                    {{ message.content }}
-                    {% endif %}
-                </div>
-            </div>
-            {% endif %}
-            {% endfor %}
+
+    <!-- Chat Area -->
+    <div class="w-3/4 p-4 flex flex-col h-screen">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold">Chat with Digro AI</h2>
+            <form action="{% url 'logout' %}" method="post" id="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="bg-red-500 hover:bg-red-400 text-white font-semibold py-2 px-4 rounded">Logout</button>
+            </form>
         </div>
-        <div id="loading" class="hidden text-center text-yellow-400 mt-2">Generating...</div> <!-- Loading message -->
+        <div class="flex-1 overflow-y-auto mb-4 hide-scrollbar" id="messages-container">
+            <div id="messages">
+                {% for message in messages %}
+                {% if message.sender == 'user' %}
+                <div class="mb-2 text-right">
+                    <div class="bg-green-500 p-2 rounded-lg inline-block">
+                        {{ message.content }}
+                    </div>
+                </div>
+                {% else %}
+                <div class="mb-2 text-left">
+                    <div class="bg-gray-700 p-2 rounded-lg inline-block">
+                        {% if message.is_image %}
+                        <img src="{{message.image.url}}" alt="Generated UML Diagram" class="rounded-lg" />
+                        {% else %}
+                        {{ message.content }}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div id="loading" class="hidden text-center text-yellow-400 mt-2">Generating...</div> <!-- Loading message -->
+        </div>
+        <div id="end"></div>
+        <form id="chat-form" class="flex">
+            {% csrf_token %}
+            <input type="text" name="message" id="message" required class="bg-gray-700 text-white rounded-l-lg w-full py-2 px-3 focus:outline-none focus:ring focus:ring-green-500" placeholder="Type your message...">
+            <input type="hidden" id="chat-uuid" value="{{ chat.uuid }}">
+            <button type="submit" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-r-lg">Send</button>
+        </form>
     </div>
-    <div id="end"></div>
-    <form id="chat-form" class="flex">
-        {% csrf_token %}
-        <input type="text" name="message" id="message" required class="bg-gray-700 text-white rounded-l-lg w-full py-2 px-3 focus:outline-none focus:ring focus:ring-green-500" placeholder="Type your message...">
-        <input type="hidden" id="chat-uuid" value="{{ chat.uuid }}">
-        <button type="submit" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-r-lg">Send</button>
-    </form>
-</div>
 
+    <script>
+        $(document).ready(function () {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-<script>
-    $(document).ready(function () {
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            // Function to scroll to the bottom of the messages container
+            function scrollToBottom() {
+                $('#messages-container').animate({ scrollTop: $('#messages-container')[0].scrollHeight }, 500);
+            }
 
-        // Function to scroll to the bottom of the messages container
-        function scrollToBottom() {
-            $('#messages-container').animate({ scrollTop: $('#messages-container')[0].scrollHeight }, 500);
-        }
+            // Call this function on page load to scroll to the latest message
+            scrollToBottom();
 
-        // Call this function on page load to scroll to the latest message
-        scrollToBottom();
+            $('#chat-form').on('submit', function (e) {
+                e.preventDefault();  // Prevent page reload
 
-        $('#chat-form').on('submit', function (e) {
-            e.preventDefault();  // Prevent page reload
+                const message = $('#message').val();
+                const chat_id = $('#chat-uuid').val();
+                $('#messages').append('<div class="mb-2 text-center"><span class="text-gray-400">Thinking...</span></div>');
+                $('#messages-container').animate({ scrollTop: $('#messages-container')[0].scrollHeight }, 500);
 
-            const message = $('#message').val();
-            const chat_id = $('#chat-uuid').val();
-            $('#messages').append('<div class="mb-2 text-center"><span class="text-gray-400">Thinking...</span></div>');
-            $('#messages-container').animate({ scrollTop: $('#messages-container')[0].scrollHeight }, 500);
+                $.ajax({
+                    url: "/chat/api/v1/",  // Django URL for the chat API
+                    type: "POST",
+                    contentType: "application/json",
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    },
+                    data: JSON.stringify({ message: message, chat_uuid: chat_id }),
+                    success: function (response) {
+                        if (response.success) {
+                            // Append the user message
+                            console.log("here we go")
+                            $('#messages').append('<div class="mb-2 text-right"><div class="bg-green-500 p-2 rounded-lg inline-block">' + message + '</div></div>');
+                            
+                            // Check if response contains a PlantUML diagram
+                            if (response.plant_uml_code) {
+                                $('#messages').append('<div class="mb-2 text-left"><div class="bg-gray-700 p-2 rounded-lg inline-block">Diagram generated:</div></div>');
+                                $('#messages').append('<div class="mb-2 text-left"><img src="' + response.plant_uml_code + '" alt="Generated UML Diagram" class="rounded-lg" /></div>');
+                            } else {
+                                $('#messages').append('<div class="mb-2 text-left"><div class="bg-gray-700 p-2 rounded-lg inline-block">' + response.description + '</div></div>');
+                            }
+                            
+                            $('#message').val('');  // Clear input
 
-            $.ajax({
-                url: "/chat/api/v1/",  // Django URL for the chat API
-                type: "POST",
-                contentType: "application/json",
-                headers: {
-                    'X-CSRFToken': csrftoken
-                },
-                data: JSON.stringify({ message: message, chat_uuid: chat_id }),
-                success: function (response) {
-                    if (response.success) {
-                        // Append the user message
-                        console.log("here we go")
-                        $('#messages').append('<div class="mb-2 text-right"><div class="bg-green-500 p-2 rounded-lg inline-block">' + message + '</div></div>');
-                        
-                        // Check if response contains a PlantUML diagram
-                        if (response.plant_uml_code) {
-                            $('#messages').append('<div class="mb-2 text-left"><div class="bg-gray-700 p-2 rounded-lg inline-block">Diagram generated:</div></div>');
-                            $('#messages').append('<div class="mb-2 text-left"><img src="' + response.plant_uml_code + '" alt="Generated UML Diagram" class="rounded-lg" /></div>');
+                            // Scroll to the bottom
+                            $('#messages-container').animate({ scrollTop: $('#messages-container')[0].scrollHeight }, 500);
                         } else {
-                            $('#messages').append('<div class="mb-2 text-left"><div class="bg-gray-700 p-2 rounded-lg inline-block">' + response.description + '</div></div>');
+                            alert('Error: ' + response.error);
                         }
-                        
-
-                        $('#message').val('');  // Clear input
-
-                        // Scroll to the bottom
-                        $('#messages-container').animate({ scrollTop: $('#messages-container')[0].scrollHeight }, 500);
-                    } else {
-                        alert('Error: ' + response.error);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
                     }
-                },
-                error: function (error) {
-                    console.error('Error:', error);
-                }
+                });
             });
         });
-    });
-</script>
-
+    </script>
     
 </body>
 </html>

@@ -1,14 +1,18 @@
 ```plantuml
 @startuml
 
-participant Customer
-participant Order
-participant Warehouse
+participant User as U
+participant Chatbot as C
 
-Customer -> Order: Place Order
-Order -> Warehouse: Fulfill Order
-Warehouse -> Order: Ship Order
-Order -> Customer: Receive Order
+U --> C: Hi, how can I help you?
+C --> U: Sure, I can help you with a variety of topics. What would you like to know?
+U --> C: Can you tell me about your features?
+C --> U: Sure, here are some of my features:
+  - I can answer questions about a variety of topics.
+  - I can help you with tasks such as making appointments or finding information.
+  - I can provide you with entertainment, such as playing games or telling jokes.
+U --> C: That's great! Can you help me find a restaurant?
+C --> U: Sure, what kind of food are you looking for and what is your location?
 
 @enduml
 ```

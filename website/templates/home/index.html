@@ -10,7 +10,7 @@
         <h1 class="text-3xl md:text-4xl font-bold mb-4">Unlock the Power of AI-Driven Diagram Creation with Digro AI</h1>
         <p class="text-base md:text-lg text-gray-400 max-w-md mx-auto">Digro AI lets you generate professional diagrams effortlessly. Use AI prompts to create, save, and edit diagrams instantly.</p>
         <div class="mt-8">
-            <a href="#get-started" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-3 px-6 md:px-8 rounded-lg">Try for Free</a>
+            <a href="{% url "login" %}" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-3 px-6 md:px-8 rounded-lg">Try for Free</a>
         </div>
     </header>
 
@@ -37,6 +37,6 @@
     <section id="cta" class="bg-gray-800 flex flex-col justify-center items-center text-center py-12 px-12">
         <h2 class="text-3xl font-semibold mb-4">Ready to Generate Your First Diagram?</h2>
         <p class="text-lg text-gray-400 mb-8">Sign up today and unlock the full potential of Digro AI's capabilities for creating professional diagrams.</p>
-        <a href="#get-started" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-3 px-6 md:px-8 rounded-lg">Get Started for Free</a>
+        <a href="{% url "login" %}" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-3 px-6 md:px-8 rounded-lg">Get Started for Free</a>
     </section>
 {% endblock %}

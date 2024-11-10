@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,logout
 from django.contrib import auth
 from django.contrib import messages
 from .forms import RegistrationForm
@@ -15,7 +15,7 @@ def login(request):
         
         if user is not None:
             auth.login(request, user)
-            return redirect('home')  # Redirect to a homepage or dashboard
+            return redirect('chat')  # Redirect to a homepage or dashboard
         else:
             messages.error(request, 'Invalid username or password.')
     return render(request=request,template_name='login/index.html')
@@ -43,3 +43,7 @@ def forgot_password(request):
 
 def reset_password(request,uuid):
     return render(request=request,template_name="reset_password/index.html")
+
+def logout_view(request):
+    logout(request) 
+    return redirect('login')

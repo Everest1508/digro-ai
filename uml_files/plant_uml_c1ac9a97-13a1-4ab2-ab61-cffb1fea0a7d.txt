@@ -1,0 +1,20 @@
+```plantuml
+@startuml
+skinparam backgroundcolor white
+
+participant Client
+participant WebServer
+participant Database
+participant Security
+participant LoadBalancer
+
+Client -> LoadBalancer : Request
+LoadBalancer -> Security : Check Security
+Security -> LoadBalancer : Security OK
+LoadBalancer -> WebServer : Forward Request
+WebServer -> Database : Database Request
+Database -> WebServer : Database Response
+WebServer -> LoadBalancer : Response
+LoadBalancer -> Client : Response
+@enduml
+```

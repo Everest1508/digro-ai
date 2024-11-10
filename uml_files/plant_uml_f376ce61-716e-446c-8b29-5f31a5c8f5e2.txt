@@ -1,0 +1,6 @@
+```
+@startuml
+Bob -> Alice : Hello
+Alice --> Bob : Hello there!
+@enduml
+```
