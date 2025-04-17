@@ -10,7 +10,7 @@ from django.core.files import File
 
 
 # Configure your API key here
-genai.configure(api_key="AIzaSyD0EFExVF1KUbF2BIjPV6CArpDhaLxDpig")
+genai.configure(api_key="API-KEY")
 
 def get_gemini_response(input_text):
     try:
